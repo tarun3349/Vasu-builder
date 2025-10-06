@@ -12,7 +12,7 @@ $user = current_user();
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><?= e($cfg['app']['name']) ?></title>
   <link rel="stylesheet" href="<?= asset_url('css/style.css') ?>" />
-  <link rel="icon" href="<?= base_url('public/favicon.ico') ?>" />
+  
   <script>window.csrf = "<?= csrf_token() ?>";</script>
 </head>
 <body>

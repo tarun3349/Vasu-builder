@@ -11,7 +11,8 @@ return [
     ],
     'app' => [
         'name' => 'KTS Aquarium and Pets',
-        'base_url' => '/kts',
+        // Set to '' if serving app at domain root, or '/kts' if under subpath
+        'base_url' => '',
         'admin_default_email' => 'admin@kts.local',
         'admin_default_password' => 'admin123',
         'admin_whatsapp_number' => '+919597203715',
