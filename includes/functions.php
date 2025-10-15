@@ -25,6 +25,11 @@ function generate_user_id() {
     return 'KTS' . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
 }
 
+function format_user_code($user_id) {
+    $numeric_id = (int)$user_id;
+    return 'KTS-' . str_pad((string)$numeric_id, 5, '0', STR_PAD_LEFT);
+}
+
 function format_price($price) {
     return '₹' . number_format($price, 2);
 }
