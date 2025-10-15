@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_status'])) {
 // Get search and filter parameters
 $search = isset($_GET['search']) ? sanitize_input($_GET['search']) : '';
 $status = isset($_GET['status']) ? sanitize_input($_GET['status']) : '';
-$user_id_filter = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 0;
 
 // Build query
 $where_conditions = [];
@@ -40,11 +39,6 @@ if (!empty($search)) {
 if (!empty($status)) {
     $where_conditions[] = "o.order_status = ?";
     $params[] = $status;
-}
-
-if ($user_id_filter > 0) {
-    $where_conditions[] = "o.user_id = ?";
-    $params[] = $user_id_filter;
 }
 
 $where_clause = empty($where_conditions) ? '' : 'WHERE ' . implode(' AND ', $where_conditions);
@@ -84,7 +78,6 @@ foreach ($status_counts as $stat) {
     <title>Order Management - <?php echo SITE_NAME; ?></title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐠</text></svg>">
-    <?php include '../includes/pwa.php'; ?>
     <style>
         .admin-sidebar {
             position: fixed;
