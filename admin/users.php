@@ -85,6 +85,7 @@ $users = $stmt->fetchAll();
     <title>User Management - <?php echo SITE_NAME; ?></title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐠</text></svg>">
+    <?php include '../includes/pwa.php'; ?>
     <style>
         .admin-sidebar {
             position: fixed;
@@ -200,6 +201,7 @@ $users = $stmt->fetchAll();
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Code</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Mobile</th>
@@ -212,6 +214,7 @@ $users = $stmt->fetchAll();
                             <?php foreach ($users as $user): ?>
                                 <tr>
                                     <td><?php echo $user['user_id']; ?></td>
+                                    <td><?php echo htmlspecialchars(format_user_code($user['user_id'])); ?></td>
                                     <td><?php echo htmlspecialchars($user['name']); ?></td>
                                     <td><?php echo htmlspecialchars($user['email']); ?></td>
                                     <td><?php echo htmlspecialchars($user['mobile']); ?></td>
@@ -222,6 +225,7 @@ $users = $stmt->fetchAll();
                                     </td>
                                     <td><?php echo date('M d, Y', strtotime($user['created_at'])); ?></td>
                                     <td>
+                                        <a href="orders.php?user_id=<?php echo $user['user_id']; ?>" class="btn btn-info btn-sm">View Orders</a>
                                         <form method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this user?')">
                                             <input type="hidden" name="user_id" value="<?php echo $user['user_id']; ?>">
                                             <button type="submit" name="delete_user" class="btn btn-danger btn-sm" <?php echo $user['user_id'] == $_SESSION['user_id'] ? 'disabled' : ''; ?>>Delete</button>
